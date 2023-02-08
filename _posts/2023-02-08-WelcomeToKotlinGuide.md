@@ -6,7 +6,7 @@ categories: [Kotlin, Spring, API, Tutorial]
 tags: []
 ---
 
-# <div align="center">Welcome To The Kotlin Guide</div>
+# Welcome To The Kotlin Guide
 
 In this repository, you will find a range of articles, tutorials, and examples covering topics related to Kotlin. As of writing, it will contain a lot of the tools that I use in my day-to-day work and is primarily a repository of knowledge for my own work, but please feel free to learn from it too!
 
