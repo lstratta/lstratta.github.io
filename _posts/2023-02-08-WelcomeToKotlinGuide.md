@@ -2,7 +2,7 @@
 title: Welcome To The Kotlin Guide
 author: Luke Stratta
 date: 2023-02-08 19:00:00 +0000
-categories: [Kotlin, Spring, API, Tutorial]
+categories: [Kotlin, Spring, Tutorial]
 tags: []
 ---
 
