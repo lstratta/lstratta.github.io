@@ -16,6 +16,8 @@ tags:
     - Getting Started
 ---
 
+# Getting Started With Kotlin and Spring Boot
+
 If you want to create a web app with Kotlin, you're going to need a few things. 
 
 The first one of those things you're going to need a web server to be able to serve the stuff you're going to be creating; whether that is millions of users, or just a local project.
@@ -30,9 +32,9 @@ Well, the wonderful people over at Spring have put together this handy tool call
 
 It's a click-click-click-done wizard that then downloads a zip file with all the dependencies you need to get started writing your Kotlin app.
 
-![The Spring Initializr](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr.png)
+![The Spring Initializr](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr.png)
 
-Here you choose your language, the Spring Boot version, add your roject metadata, and choose your JVM version.
+Here you choose your language, the Spring Boot version, add your project metadata, and your JVM version.
 
 ## Dependency... heaven? 
 
@@ -54,7 +56,7 @@ Like every tutorial out there, we're going to put together a simple API to walk 
 
 But don't you worry. I am going to help you start to work with more advanced topics in the future; all the stuff I wish I had been able to find when I started out.
 
-![Spring Boot Dependencies](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr-dependencies.png)
+![Spring Boot Dependencies](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr-dependencies.png)
 
 For our simple API, we have chosen:
 * Spring Web to allow us to have a server for our app and allow us to create a RESTful API
@@ -70,11 +72,11 @@ Now that we've got the zip file downloaded and unzipped, we can open up the fold
 
 IntelliJ has gone off and started to to automatically download all the dependencies we specified in in the Spring Initializr, as well as the ones that were put in there by Spring Boot.
 
-![IntelliJ doing it's thing](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/intellij-download.png)
+![IntelliJ doing it's thing](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/intellij-download.png)
 
 ## While it's doing that, let's take a look at what files we have in the project.
 
-![The Project Files](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/project-layout.png)
+![The Project Files](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/project-layout.png)
 
 Taking a look at the contents of the `superapp` folder we have a few key files and directories. 
 
@@ -102,7 +104,27 @@ Typically, we'd have more separation between these layers, but for the purposes 
 
 Let's create the data model first.
 
-![The Super Hero Data Model](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/super-hero-data-model.png)
+![The Super Hero Data Model](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/super-hero-data-model.png)
+
+```kotlin
+package com.awesomeco.superapp.superhero
+
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+
+@Entity(name = "super_hero")
+data class SuperHero (
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0,
+    val name: String,
+    @Column(name = "normie_name")
+    val normieName: String,
+)
+```
 
 
 We've used the Kotlin `data class` here because as we're holding data in this object. Normal classes have some methods that need to be overridden - data classes take care of that for us.
@@ -125,11 +147,24 @@ Is exactly what `@Entity` does for us. It defines to Jakarta that this is a data
 
 You'll notice the annotation labelled `@Column`. All this does is define the name of the column in the database table. Typically, SQL databases have the table names and columns in lowercase with an underscore `_` between words. Just like in `@Entity`, `name = normie_name` is what we are calling that column.
 
+
+
 ## A repository for all your super heroes
 
 This next file is pretty easy. This is what does all of the database interaction.
 
-![The Super Hero Repository](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/super-hero-repo.png)
+![The Super Hero Repository](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/super-hero-repo.png)
+
+```kotlin
+package com.awesomeco.superapp.superhero
+
+import org.springframework.data.repository.CrudRepository
+import org.springframework.stereotype.Repository
+
+@Repository
+interface SuperHeroRepository: CrudRepository<SuperHero, Long>
+
+```
 
 The `SuperHeroRepository` is an interface that implements the `CrudRepository` interface which accepts two values. The type of the object (or table - but not the table name if it is different to the name of the object) you want to interact with, and the type of the primary key value. In this case, the object/table is the `SuperHero` object and the type of its primary key is `Long`.
 
@@ -141,7 +176,31 @@ Onto the controller.
 
 Now this is looking good.
 
-![The Super Hero Controller](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/super-hero-controller.png)
+![The Super Hero Controller](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/super-hero-controller.png)
+
+```kotlin
+package com.awesomeco.superapp.superhero
+
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+
+@RestController
+@RequestMapping("/super-hero")
+class SuperHeroController(
+    val superHeroRepository: SuperHeroRepository
+) {
+
+    @GetMapping
+    fun getAllSuperHeroes(): SuperHeroResponse{
+        return SuperHeroResponse(superHeroRepository.findAll().toList())
+    }
+}
+
+data class SuperHeroResponse(
+    val listOfSuperHeroes: List<SuperHero> = emptyList()
+)
+```
 
 We've done a few things here.
 
@@ -160,7 +219,7 @@ But we have no data in the database, which means we have no Super Heroes to call
 
 Let's populate the database with our Super Heroes.
 
-![Create tables and insert data](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/data-sql-script.png)
+![Create tables and insert data](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/data-sql-script.png)
 
 Here we have a simple SQL script in the `resources/sql` path. I created the `sql/` directory, it won't be there by default.
 
@@ -185,7 +244,7 @@ VALUES
 
 Next, we need to specify some details to our application.
 
-![Add data to application.properties](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/application-properties.png)
+![Add data to application.properties](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/application-properties.png)
 
 We've got a few things here that allow us to connect to the database and allow us to populate the database.
 
@@ -235,7 +294,7 @@ gradlew.bat bootRun
 
 If everything went to plan, you should see something like this.
 
-![Application running in the terminal](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/startup-output.png)
+![Application running in the terminal](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/startup-output.png)
 
 We want to see whether our database has been populated with our SQL script. If it has no data in it, something went wrong further up the line.
 
@@ -249,7 +308,7 @@ http://localhost:8080/h2-console
 
 You should be presented with a login form with your database URL in the `JDBC URL` field.
 
-![H2 Login Form](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/h2-login-form.png)
+![H2 Login Form](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/h2-login-form.png)
 
 Press "Connect" and you should see a SQL editor with run commands at the top and your `SUPER_HERO` table on the left.
 
@@ -260,7 +319,7 @@ In the text box, run the command:
 SELECT * FROM super_hero
 ```
 
-![H2 SQL Editor](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/h2-sql-editor.png)
+![H2 SQL Editor](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/h2-sql-editor.png)
 
 
 And you should see your data there!
@@ -283,7 +342,7 @@ curl -X GET --location "http://localhost:8080/super-hero" | json_pp
 
 Press enter, and you should then see this output: 
 
-![cURL output](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/curl-request.png)
+![cURL output](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/curl-request.png)
 
 And if you got an output like that with whatever data you put in your database, then success!
 
