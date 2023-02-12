@@ -19,7 +19,7 @@ tags:
 
 To get the most out of this tutorial, I'd recommend you have:
 
- * Java installed on your machine
+ * Java installed on your machine - see [this post](/posts/installing-java-for-kotlin)
  * Basic Kotlin language understanding
  * You've opened a terminal before and can change directory
  * IntelliJ, or your IDE of choice installed
