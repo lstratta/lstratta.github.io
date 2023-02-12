@@ -1,6 +1,6 @@
 ---
 title: Getting Started With Kotlin and Spring Boot
-author: Luke
+author: luke
 date: 2023-02-12T14:01:37.984Z
 categories:
     - Kotlin
