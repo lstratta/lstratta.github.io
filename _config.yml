@@ -21,10 +21,10 @@ timezone: Europe/London
 
 title: Luke Stratta        # the main title
 
-tagline: Backend Engineer   # it will display as the sub-title
+tagline: Backend engineer - sharing what I learn   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  Backend engineer with experience in API design using Kotlin and Spring.
+  Backend engineer that nerds out about System and API design using Kotlin and Spring. Sharing what I learn.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://lstratta.github.io'
