@@ -23,6 +23,8 @@ tags:
 To get the most out of this tutorial, I'd recommend you have:
 
  * Java installed on your machine
+ * Basic Kotlin language understanding
+ * You've opened a terminal before and can change directory
  * IntelliJ, or your IDE of choice installed
  * Your favourite beverage to hand
 
@@ -42,7 +44,7 @@ It's a click-click-done wizard that then downloads a zip file with all the depen
 
 ![The Spring Initializr](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr.png)
 
-Here you choose your language, the Spring Boot version, add your project metadata, and your select JVM version. If you're starting a brand new project, go for the latest LTS (long term support) version.
+Here you choose your language, the Spring Boot version, add your project metadata, and select your JVM version. If you're starting a brand new project, go for the latest LTS (long term support) version.
 
 ## Dependency... heaven? 
 
@@ -67,7 +69,7 @@ But don't you worry. I am going to help you start to work with more advanced top
 ![Spring Boot Dependencies](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr-dependencies.png)
 
 For our simple API, we have chosen:
-* `Spring Web` to allow us to have a server for our app and allow us to create a RESTful API
+* `Spring Web` to allow us to have a server for our app and allow us to create a RESTful API. It will automatically set up a Tomcat web server for us
 * `Spring Data JPA` to allow us to connect with SQL databases using the Java Persistence API
 * `H2 Database` which is an in-memory database; great for testing.
 * `Gradle - Kotlin` as the build tool for this project - there's not enough Gradle content out there, so this is the beginning of my contributions.
@@ -78,11 +80,11 @@ All we need to do now is hit `GENERATE` and we're off to the races. That will do
 
 ## Just as good as opening presents! Well, kind of.
 
-Now that we've got the zip file downloaded and unzipped, we can open up the folder inside your IDE of choice. I am using IntelliJ, but use whatever you're happiest with.
+Now that we've got the zip file downloaded and unzipped, we can open up the folder inside your IDE of choice. I am using IntelliJ, but use whatever you're most comfortable with.
 
 ![IntelliJ doing it's thing](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/intellij-download.png)
 
-IntelliJ has gone off and started to to automatically download all the dependencies we specified in in the Spring Initializr, as well as the ones that were put in there by Spring Boot.
+IntelliJ has gone off and started to to automatically download all the dependencies we specified in the Spring Initializr, as well as the ones that were put in there by Spring Boot.
 
 ## While it's doing that, let's take a look at what files we have in the project.
 
@@ -92,9 +94,9 @@ Taking a look at the contents of the `superapp` folder we have a few key files a
 
 `gradle/` contains the files to run gradle in the project so you don't have to download it onto your computer. It comes nicely packaged in the Spring Boot starter.
 
-`build.gradle.kts` contains everything related to building the project (no surprise there really.) It contains the of things that make Gradle the incredible tool it is. Currently, it has the core plugins required for Kotlin to work with Spring, the dependencies that were downloaded by IntelliJ and a feature of Gradle call `tasks`. We'll get into what all those are later on.
+`build.gradle.kts` contains everything related to building the project (no surprise there really). Currently, it has the core plugins required for Kotlin to work with Spring, the dependencies that were downloaded by IntelliJ and a feature of Gradle call `tasks`. We'll get into what all those are later on.
 
-`gradlew` is the wrapper for Gradle: that's what we'll be use to run `build tasks`. `gradlew` is for Linux and Mac, `gradlew.bat` is for Windows. 
+`gradlew` is the wrapper for Gradle: that's what we'll be use to run `build tasks`. `gradlew` is for Linux and Mac, and Windows Subsystem for Linux (WSL), `gradlew.bat` is for Windows. 
 
 `settings.gradle.kts` is the file that contains information about build projects. You can have multiple subprojects in a Gradle project, and this is where you would define that information.
 
@@ -108,7 +110,7 @@ Let's get a simple API up and running. We're going to need a couple of things:
 2. We'll need a controller that will handle requests and respond with objects.
 3. We'll need a schema in the database so that the database knows to create the tables on app startup.
 
-Typically, we'd have more separation between these layers, but for the purposes of respecting your time, we'll skip a few steps.
+Typically, we'd have more separation between these layers, but for the purposes of getting to the point, we'll skip a few steps. We'll come back to this stuff in later posts.
 
 ## The Data Model
 
@@ -136,28 +138,25 @@ data class SuperHero (
 )
 ```
 
-
 We've used the Kotlin `data class` here because as we're holding data in this object. Normal classes have some methods that need to be overridden - data classes take care of that for us.
 
-#### jakarta.persistence
+### jakarta.persistence
 
 `jakarta.persistence` is a persistence and object/relational mapping standard which comes with Spring version `3.x` - another one you'll see is `javax.persistence`. Either one of these will be required to enable us to use this data class as an entity in the database, which...
 
-#### @Entity
+### @Entity
 
-Is exactly what `@Entity` does for us. It defines to Jakarta that this is a data model for the database to create a table for. The `name = "superhero"` field tells the database what to name the table. In this case, it is just the lowercase version of the name of the class. 
+Is exactly what `@Entity` does for us. Jakarta uses this to define the data model for the database and what to create a table for. The `name = "super_hero"` field specifies the name the table. In this case, it is just the lowercase version of the name of the class with an underscore `_` separating the words. 
 
-#### @Id
+### @Id
 
 `@Id` adds the primary key constraint to the `id` field. `@GeneratedValue` tells the database that this is a value that needs to be generated each time a new object is saved to the database. 
 
 `strategy = GenerationType.IDENTITY` indicates to Jakarta that it must assign primary keys for the entity. This value is also set to `0` because databases will treat that as a value that needs to have a primary key value assigned to it.
 
-#### @Column
+### @Column
 
 You'll notice the annotation labelled `@Column`. All this does is define the name of the column in the database table. Typically, SQL databases have the table names and columns in lowercase with an underscore `_` between words. Just like in `@Entity`, `name = normie_name` is what we are calling that column.
-
-
 
 ## A repository for all your super heroes
 
@@ -176,9 +175,9 @@ interface SuperHeroRepository: CrudRepository<SuperHero, Long>
 
 ```
 
-The `SuperHeroRepository` is an interface that implements the `CrudRepository` interface which accepts two values. The type of the object (or table - but not the table name if it is different to the name of the object) you want to interact with, and the type of the primary key value. In this case, the object/table is the `SuperHero` object and the type of its primary key is `Long`.
+The `SuperHeroRepository` is an interface that implements the `CrudRepository` interface, which accepts two values. The name of the object you want to interact with, and the type of the primary key value. In this case, the object/table is the `SuperHero` object and the type of its primary key is `Long`.
 
-That's it! **C**reate, **R**ead, **U**pdate, **D**elete actions are already implemented for us. Spring also does some magic for us if we want to create more adventurous database queries, but that will be in a later post.
+That's it! **C**reate, **R**ead, **U**pdate, **D**elete actions are already implemented for us. Spring also does some magic for us if we want to create more adventurous database queries, but we'll explore that functionality in a later post.
 
 Onto the controller.
 
@@ -214,12 +213,12 @@ data class SuperHeroResponse(
 
 We've done a few things here.
 
-1. Created a REST conroller with a mapping of `/super-hero`.
-2. Created an endpoint for a get request on `/super-hero`.
-3. created a `SuperHeroResponse` object to make sure our RESTful API is REST compliant.
-4. Connected to the `SuperHeroRepository` to make a `findAll` query and returned that as a field within the `SuperHeroResponse` object.
+1. Created a REST controller with a mapping of `/super-hero`.
+2. Created an endpoint for a `GET` request on `/super-hero`.
+3. Created a `SuperHeroResponse` object to make sure our RESTful API is REST compliant.
+4. Connected to the `SuperHeroRepository` to make a `findAll()` query and returned that as a field within the `SuperHeroResponse` object.
 
-Usually, we'd be making these repository calls inside a service layer, but this is for simplicity.
+Usually, we'd be making the repository calls inside a service layer, but this is for simplicity.
 
 ## Where is everybody? 
 
@@ -229,18 +228,11 @@ But we have no data in the database, which means we have no Super Heroes to call
 
 Let's populate the database with our Super Heroes.
 
-![Create tables and insert data](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/data-sql-script.png)
+![Create tables and insert data](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/data-sql-script.new.png)
 
 Here we have a simple SQL script in the `resources/sql` path. I created the `sql/` directory, it won't be there by default.
 
 ```sql
-CREATE TABLE IF NOT EXISTS super_hero (
-    id BIGINT,
-    name VARCHAR(40) NOT NULL,
-    normie_name VARCHAR(40),
-    PRIMARY KEY (id)
-);
-
 INSERT INTO super_hero(
     id,
     name,
@@ -252,25 +244,9 @@ VALUES
     (3, 'Starlord', 'Peter Quill');
 ```
 
-Next, we need to specify some details to our application.
+Next, we need to specify some details to our application. Head on over to the `application.properties` file and add in the code below.
 
 ![Add data to application.properties](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/application-properties.png)
-
-We've got a few things here that allow us to connect to the database and allow us to populate the database.
-
-`spring.datasource.driver-class-name=org.h2.Driver` provides us with the driver to use our database of choice, here being H2.
-
-`spring.datasource.url=jdbc:h2:mem:superdb` provides us our database URL to connect to shortly. `superdb` can be changed to anything you like.
-
-`spring.h2.console.enabled=true` allows us to access the console at the URL we defined above.
-
-`spring.jpa.defer-datasource-initialization=true` initialises our database for us.
-
-`spring.jpa.properties.hibernate.format_sql=true` not required, but formats SQL in the terminal for a nicer viewing experience.
-
-`spring.sql.init.schema-locations=classpath:sql/data.sql` tells Spring where the location of our SQL script is.
-
-`spring.sql.init.mode=always` tells Spring to always initialise our database.
 
 ```
 spring.datasource.url=jdbc:h2:mem:superdb
@@ -280,6 +256,22 @@ spring.jpa.properties.hibernate.format_sql=true
 spring.sql.init.schema-locations=classpath:sql/data.sql
 spring.sql.init.mode=always
 ```
+
+We've got a few things here that allow us to connect to the database and populate it.
+
+`spring.datasource.driver-class-name=org.h2.Driver` provides us with the driver to use our database of choice, here being H2.
+
+`spring.datasource.url=jdbc:h2:mem:superdb` provides us our database URL to connect to shortly. `superdb` can be changed to anything you like.
+
+`spring.h2.console.enabled=true` allows us to access the databse from the console at the URL we defined above.
+
+`spring.jpa.defer-datasource-initialization=true` defines that we want to have our database schema automatically created for us using the `SuperHero` data model we created above. If we wanted to create the schema manually, we would use the `spring.jpa.hibernate.ddl-auto=none` option.
+
+`spring.jpa.properties.hibernate.format_sql=true` not required, but formats SQL in the terminal for a nicer viewing experience.
+
+`spring.sql.init.schema-locations=classpath:sql/data.sql` tells Spring where the location of our SQL script is.
+
+`spring.sql.init.mode=always` By default, only embedded databases (databases that are tightly integrated into the application, like H2) are initialised with SQL scripts by default. This option tells Spring to always initialise the database, regardless of it being embedded or not.
 
 ## INSPECTIONS!
 
@@ -308,7 +300,12 @@ If everything went to plan, you should see something like this.
 
 We want to see whether our database has been populated with our SQL script. If it has no data in it, something went wrong further up the line.
 
-If you can see something like "Started SuperappApplicationKt in 1.496 seconds" at the bottom of output, next look for the output that says "H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:superdb'" which should be up a few lines. If that is there, head to your browser.
+If you can see something like `Started SuperappApplicationKt in 1.496 seconds` at the bottom of output, next look for the line that says 
+
+```
+H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:superdb'
+``` 
+which should be up a few lines. If that is there, head to your browser.
 
 In the URL bar, type in:
 
@@ -336,13 +333,13 @@ And you should see your data there!
 
 Note: SQL is case insensitive, but it's common to write commands with the SQL keywords in all capitals.
 
-## Let's Get 'Em
+## "Look! It's the Bat Signal!
 
 Now that we know the database has been populated with data, let's check that our API works. We need to make a `GET` request against the endpoint `/super-hero` and we should be sent back an object that contains a list of super heroes. 
 
 There are a couple of ways to _manually_ test APIs. One of them is to use an API testing platform like [Insomnia](https://insomnia.rest/) which is open-source and my choice, or there is [Postman](https://www.postman.com/) which is another popular choice.
 
-Alternatively, if you're on Linux, MacOS or WSL, you can use this command:
+Alternatively, if you're on Linux, MacOS or WSL, you can use this command in your terminal:
 
 ```bash
 curl -X GET --location "http://localhost:8080/super-hero" | json_pp
@@ -354,18 +351,18 @@ Press enter, and you should then see this output:
 
 ![cURL output](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/curl-request.png)
 
-And if you got an output like that with whatever data you put in your database, then success!
+And if you received an output like that with whatever data you put in your database, then success!
 
-And that's how you make an API in Spring Boot with Kotlin! 
+And that's how you make an API in Spring Boot with Kotlin.
 
-## That's a wrap!
+## That's a wrap
 
 As you can see, with just a few lines of code and couple of files, you have a nicely organised app and with clear functionality between files.
 
-Next time we'll look into the data, service, and controller layer a bit more and start work with data transfer objects, otherwise known as DTOs.
+In future posts, we'll look into the data, service, and controller layer a bit more and start work with data transfer objects, otherwise known as DTOs.
 
 If you would like to see all the code above inside the project itself, checkout my <a href="https://github.com/lstratta/kotlin-guide/tree/main/tutorials/getting-started-kotlin-spring-boot/superapp" target="_blank">GitHub repo here for the project here</a>.
 
-If you found this guide helpful, feel free to share it with friends and give it a star over <a href="https://github.com/lstratta/kotlin-guide/" target="_blank">on my GitHub</a>.
+**If you found this guide helpful, feel free to share it with friends and give it a star over <a href="https://github.com/lstratta/kotlin-guide/" target="_blank">on my GitHub</a>.**
 
 Until next time! 
