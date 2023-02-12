@@ -8,7 +8,7 @@ categories:
     - Tutorial
 tags:
     - Spring
-    - Gradel
+    - Gradle
     - Maven
     - Spring-Boot
     - Starter
@@ -18,27 +18,35 @@ tags:
 
 # Getting Started With Kotlin and Spring Boot
 
+### Prerequisites
+
+To get the most out of this tutorial, I'd recommend you have:
+
+ * Java installed on your machine
+ * IntelliJ, or your IDE of choice installed
+ * Your favourite beverage to hand
+
 If you want to create a web app with Kotlin, you're going to need a few things. 
 
-The first one of those things you're going to need a web server to be able to serve the stuff you're going to be creating; whether that is millions of users, or just a local project.
+The first of those things you're going to need is a web server to be able to serve the stuff you're going to be creating; whether that is to millions of users, or just a local project.
 
-Next up, you might need a way to connect to a database so that you can write some Kotlin to query against it. After that you might need a way to create an API so that you can actually connect to the database.
+Next up, you might need a way to connect to a database so that you can write some Kotlin to query against it. After that, you might want a way to create endpoints for your web app so that you can actually get some data in and out of the database.
 
-These things, and so many more all come in this neat package called Spring Boot.
+These things, and so many more, all come in this neat package called Spring Boot.
 
 ## Where do you get all these things? 
 
 Well, the wonderful people over at Spring have put together this handy tool called the <a href="https://start.spring.io" target="_blank">Spring Initializr</a>.
 
-It's a click-click-click-done wizard that then downloads a zip file with all the dependencies you need to get started writing your Kotlin app.
+It's a click-click-done wizard that then downloads a zip file with all the dependencies you need to get started writing your Kotlin app.
 
 ![The Spring Initializr](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr.png)
 
-Here you choose your language, the Spring Boot version, add your project metadata, and your JVM version.
+Here you choose your language, the Spring Boot version, add your project metadata, and your select JVM version. If you're starting a brand new project, go for the latest LTS (long term support) version.
 
 ## Dependency... heaven? 
 
-You can also add a plethora of dependencies that are appropriate for you project. 
+You can also add a plethora of dependencies that are appropriate for your project. 
 
 Want that web server we mentioned? You've got Spring Web. 
 
@@ -59,10 +67,12 @@ But don't you worry. I am going to help you start to work with more advanced top
 ![Spring Boot Dependencies](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr-dependencies.png)
 
 For our simple API, we have chosen:
-* Spring Web to allow us to have a server for our app and allow us to create a RESTful API
-* Spring Data JPA to allow us to connect with SQL databases using the Java Persistence API
-* H2 Database which is an in-memory database; great for testing.
-* We're also going to use Gradle as the build tool for this project - there's not enough Gradle content out there, so this is the beginning of my contributions.
+* `Spring Web` to allow us to have a server for our app and allow us to create a RESTful API
+* `Spring Data JPA` to allow us to connect with SQL databases using the Java Persistence API
+* `H2 Database` which is an in-memory database; great for testing.
+* `Gradle - Kotlin` as the build tool for this project - there's not enough Gradle content out there, so this is the beginning of my contributions.
+* `Jar` is the file type we are going to package our app as 
+* `Java 17` is the Java version we are going to use - the latest LTS release at the time of writing.
 
 All we need to do now is hit `GENERATE` and we're off to the races. That will download a zip file for you and all you need to do is unzip it in the location of your choice.
 
@@ -70,15 +80,15 @@ All we need to do now is hit `GENERATE` and we're off to the races. That will do
 
 Now that we've got the zip file downloaded and unzipped, we can open up the folder inside your IDE of choice. I am using IntelliJ, but use whatever you're happiest with.
 
-IntelliJ has gone off and started to to automatically download all the dependencies we specified in in the Spring Initializr, as well as the ones that were put in there by Spring Boot.
-
 ![IntelliJ doing it's thing](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/intellij-download.png)
+
+IntelliJ has gone off and started to to automatically download all the dependencies we specified in in the Spring Initializr, as well as the ones that were put in there by Spring Boot.
 
 ## While it's doing that, let's take a look at what files we have in the project.
 
-![The Project Files](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/project-layout.png)
-
 Taking a look at the contents of the `superapp` folder we have a few key files and directories. 
+
+![The Project Files](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/project-layout.png)
 
 `gradle/` contains the files to run gradle in the project so you don't have to download it onto your computer. It comes nicely packaged in the Spring Boot starter.
 
@@ -356,6 +366,6 @@ Next time we'll look into the data, service, and controller layer a bit more and
 
 If you would like to see all the code above inside the project itself, checkout my <a href="https://github.com/lstratta/kotlin-guide/tree/main/tutorials/getting-started-kotlin-spring-boot/superapp" target="_blank">GitHub repo here for the project here</a>.
 
-If you found this guide helpful, feel free to share it with friends. 
+If you found this guide helpful, feel free to share it with friends and give it a star over <a href="https://github.com/lstratta/kotlin-guide/" target="_blank">on my GitHub</a>.
 
 Until next time! 
