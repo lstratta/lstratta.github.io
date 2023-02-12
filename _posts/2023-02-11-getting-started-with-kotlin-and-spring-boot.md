@@ -228,7 +228,7 @@ But we have no data in the database, which means we have no Super Heroes to call
 
 Let's populate the database with our Super Heroes.
 
-![Create tables and insert data](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/data-sql-script.new.png)
+![Create tables and insert data](assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/data-sql-script.new.png)
 
 Here we have a simple SQL script in the `resources/sql` path. I created the `sql/` directory, it won't be there by default.
 
