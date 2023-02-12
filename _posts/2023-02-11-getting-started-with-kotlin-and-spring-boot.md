@@ -39,7 +39,7 @@ Well, the wonderful people over at Spring have put together this handy tool call
 
 It's a click-click-done wizard that then downloads a zip file with all the dependencies you need to get started writing your Kotlin app.
 
-![The Spring Initializr](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr.png)
+![The Spring Initializr](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-init-new.png)
 
 Here you choose your language, the Spring Boot version, add your project metadata, and select your JVM version. If you're starting a brand new project, go for the latest LTS (long term support) version.
 
@@ -63,7 +63,7 @@ Like every tutorial out there, we're going to put together a simple API to walk 
 
 But don't you worry. I am going to help you start to work with more advanced topics in the future; all the stuff I wish I had been able to find when I started out.
 
-![Spring Boot Dependencies](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr-dependencies.png)
+![Spring Boot Dependencies](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-init-dependencies-new.png)
 
 For our simple API, we have chosen:
 * `Spring Web` to allow us to have a server for our app and allow us to create a RESTful API. It will automatically set up a Tomcat web server for us
