@@ -374,4 +374,50 @@ Until next time!
 
 ## Prepare for trouble(shooting)! Make it double!
 
-There are a couple of reasons ta
+There are a couple of reasons that your app could fail, one of them being you made a typo somewhere - but I am going to assume you that you have checked over your code and your getting some errors that say things like 
+
+`Java version 61 expected, but only java version 55 found.`
+
+Or
+
+`Check your module classpath for missing or conflicting dependencies.`
+
+Well, I'll explain what each of these mean.
+
+### Java version [insert number here] expected, but only found Java version [insert number here].
+
+This one is quite a simple fix. It usually means that you haven't set the correct JDK, either in your terminal or in your IDE. 
+
+**If you are in the terminal**, go check out <a href="/posts/installing-java-for-kotlin" target="_blank">this article</a> to show you how to change to the correct JDK for that terminal session.
+
+**If you are in your IDE**, I'll show you what to do on IntelliJ. Other IDEs will have similar settings available.
+
+The first place you want to go is the "Project Structure" settings panel in IntelliJ. You'll find that under 
+
+`File` → `Project Structure`
+
+![Project Structure Location](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/project-strucutre-location.png)
+
+Inside the Project Structure panel, you want to select "Project" and open up the tab that 
+
+`SDK` → `Add SDK` → `JDK...`
+
+![Project Structure Panel](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/project-structure-panel.png)
+
+You'll then want to navigate to the location where your JDK is installed. This could be a few different places, depending on how you installed it - if you installed Jabba, like in <a href="/posts/installing-java-for-kotlin" target="_blank">this article</a> then you'll be able to use the image below to guide you.
+
+Jabba installs JDKs to `~/.jabba` on Linux and MacOS. On MacOS, you may have to enable hidden files with `cmd + shift + .` ← That is a full stop. 
+
+When you find the `.jabba` directory, navigate to `JDK` then select the top level folder of JDK you want to use, like in the image. Then press `open` or `ok`, depending on your system.
+
+![JDK Location](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/jdk-location.png)
+
+If you are using Windows, you're kind of on your own as I don't have a Windows system to test this on. The idea would be the same though. Find where you installed the JDK directory and select the directory.
+
+And that _should_ solve your problem! Try running the application again.
+
+If the problem persists, have a bit of a Google. If that still comes up short, open an issue.
+
+### Check your module classpath for missing or conflicting dependencies
+
+This one is a tricky one 
