@@ -15,15 +15,21 @@ tags:
     - Kotlin
     - Getting Started
 ---
-### Prerequisites
+## Prerequisites
 
 To get the most out of this tutorial, I'd recommend you have:
 
- * Java installed on your machine - see [this post](/posts/installing-java-for-kotlin)
- * Basic Kotlin language understanding
- * You've opened a terminal before and can change directory
- * IntelliJ, or your IDE of choice installed
- * Your favourite beverage to hand
+* Java installed on your machine, ideally the version you select in the set up below - see <a href="/posts/installing-java-for-kotlin" target="_blank">this post</a>
+* Basic Kotlin language understanding
+* You've opened a terminal before and can change directory
+* <a href="https://www.jetbrains.com/idea/download/" target="_blank">IntelliJ</a>, or your IDE of choice installed
+* Your favourite beverage to hand
+
+_**Some help if you get stuck**_: If you run into some problems with errors, it is likely a problem with the Java version you are using, or the settings you have for IntelliJ. If you do, just jump to the bottom of the post to find the troubleshooting section.
+
+If you're still having a problem, please open an issue on GitHub and I can do my best to help.
+
+## So, you want to build an app, aye?
 
 If you want to create a web app with Kotlin, you're going to need a few things. 
 
@@ -93,7 +99,9 @@ Taking a look at the contents of the `superapp` folder we have a few key files a
 
 `build.gradle.kts` contains everything related to building the project (no surprise there really). Currently, it has the core plugins required for Kotlin to work with Spring, the dependencies that were downloaded by IntelliJ and a feature of Gradle call `tasks`. We'll get into what all those are later on.
 
-`gradlew` is the wrapper for Gradle: that's what we'll be use to run `build tasks`. `gradlew` is for Linux and Mac, and Windows Subsystem for Linux (WSL), `gradlew.bat` is for Windows. 
+`gradlew` is the wrapper for Gradle: that's what we'll be use to run `build tasks`. `gradlew` is for Linux, Mac, and Windows Subsystem for Linux (WSL). 
+
+`gradlew.bat` is the Gradle wrapper for Windows. 
 
 `settings.gradle.kts` is the file that contains information about build projects. You can have multiple subprojects in a Gradle project, and this is where you would define that information.
 
@@ -101,7 +109,7 @@ Taking a look at the contents of the `superapp` folder we have a few key files a
 
 Alright, let's write some code, shall we? 
 
-Let's get a simple API up and running. We're going to need a couple of things:
+Let's get a API up and running. We're going to need a couple of things:
 
 1. We'll need a data model that is represented in the database.
 2. We'll need a controller that will handle requests and respond with objects.
@@ -363,3 +371,7 @@ If you would like to see all the code above inside the project itself, checkout 
 **If you found this guide helpful, feel free to share it with friends and give it a star over <a href="https://github.com/lstratta/kotlin-guide/" target="_blank">on my GitHub</a>.**
 
 Until next time! 
+
+## Prepare for trouble(shooting)! Make it double!
+
+There are a couple of reasons ta
