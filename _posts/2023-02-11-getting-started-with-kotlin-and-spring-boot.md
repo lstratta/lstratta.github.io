@@ -1,6 +1,6 @@
 ---
 title: Getting Started With Kotlin and Spring Boot
-author: Luke
+author: luke
 date: 2023-02-11T01:00:37.984Z
 categories:
     - Kotlin
@@ -15,18 +15,21 @@ tags:
     - Kotlin
     - Getting Started
 ---
-
-# Getting Started With Kotlin and Spring Boot
-
-### Prerequisites
+## Prerequisites
 
 To get the most out of this tutorial, I'd recommend you have:
 
- * Java installed on your machine
- * Basic Kotlin language understanding
- * You've opened a terminal before and can change directory
- * IntelliJ, or your IDE of choice installed
- * Your favourite beverage to hand
+* Java installed on your machine, ideally the version you select in the set up below - see <a href="/posts/installing-java-for-kotlin" target="_blank">this post</a>
+* Basic Kotlin language understanding
+* You've opened a terminal before and can change directory
+* <a href="https://www.jetbrains.com/idea/download/" target="_blank">IntelliJ</a>, or your IDE of choice installed
+* Your favourite beverage to hand
+
+_**Some help if you get stuck**_: If you run into some problems with errors, it is likely a problem with the Java version you are using, or the settings you have for IntelliJ. If you do, just jump to the bottom of the post to find the troubleshooting section.
+
+If you're still having a problem, please open an issue on GitHub and I can do my best to help.
+
+## So, you want to build an app, aye?
 
 If you want to create a web app with Kotlin, you're going to need a few things. 
 
@@ -42,7 +45,7 @@ Well, the wonderful people over at Spring have put together this handy tool call
 
 It's a click-click-done wizard that then downloads a zip file with all the dependencies you need to get started writing your Kotlin app.
 
-![The Spring Initializr](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr.png)
+![The Spring Initializr](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-init-new.png)
 
 Here you choose your language, the Spring Boot version, add your project metadata, and select your JVM version. If you're starting a brand new project, go for the latest LTS (long term support) version.
 
@@ -66,7 +69,7 @@ Like every tutorial out there, we're going to put together a simple API to walk 
 
 But don't you worry. I am going to help you start to work with more advanced topics in the future; all the stuff I wish I had been able to find when I started out.
 
-![Spring Boot Dependencies](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-initializr-dependencies.png)
+![Spring Boot Dependencies](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-init-dependencies-new.png)
 
 For our simple API, we have chosen:
 * `Spring Web` to allow us to have a server for our app and allow us to create a RESTful API. It will automatically set up a Tomcat web server for us
@@ -96,7 +99,9 @@ Taking a look at the contents of the `superapp` folder we have a few key files a
 
 `build.gradle.kts` contains everything related to building the project (no surprise there really). Currently, it has the core plugins required for Kotlin to work with Spring, the dependencies that were downloaded by IntelliJ and a feature of Gradle call `tasks`. We'll get into what all those are later on.
 
-`gradlew` is the wrapper for Gradle: that's what we'll be use to run `build tasks`. `gradlew` is for Linux and Mac, and Windows Subsystem for Linux (WSL), `gradlew.bat` is for Windows. 
+`gradlew` is the wrapper for Gradle: that's what we'll be use to run `build tasks`. `gradlew` is for Linux, Mac, and Windows Subsystem for Linux (WSL). 
+
+`gradlew.bat` is the Gradle wrapper for Windows. 
 
 `settings.gradle.kts` is the file that contains information about build projects. You can have multiple subprojects in a Gradle project, and this is where you would define that information.
 
@@ -104,7 +109,7 @@ Taking a look at the contents of the `superapp` folder we have a few key files a
 
 Alright, let's write some code, shall we? 
 
-Let's get a simple API up and running. We're going to need a couple of things:
+Let's get a API up and running. We're going to need a couple of things:
 
 1. We'll need a data model that is represented in the database.
 2. We'll need a controller that will handle requests and respond with objects.
@@ -366,3 +371,81 @@ If you would like to see all the code above inside the project itself, checkout 
 **If you found this guide helpful, feel free to share it with friends and give it a star over <a href="https://github.com/lstratta/kotlin-guide/" target="_blank">on my GitHub</a>.**
 
 Until next time! 
+
+## Prepare for trouble(shooting)! Make it double!
+
+There are a couple of reasons that your app could fail, one of them being you made a typo somewhere - but I am going to assume you that you have checked over your code and your getting some errors that say things like 
+
+`Java version 61 expected, but only java version 55 found.`
+
+Or
+
+`Check your module classpath for missing or conflicting dependencies.`
+
+Well, I'll explain what each of these mean.
+
+### Java version [insert number here] expected, but only found Java version [insert number here].
+
+This one is quite a simple fix. It usually means that you haven't set the correct JDK, either in your terminal or in your IDE. 
+
+**If you are in the terminal**, go check out <a href="/posts/installing-java-for-kotlin" target="_blank">this article</a> to show you how to change to the correct JDK for that terminal session.
+
+**If you are in your IDE**, I'll show you what to do on IntelliJ. Other IDEs will have similar settings available.
+
+The first place you want to go is the "Project Structure" settings panel in IntelliJ. You'll find that under 
+
+`File` → `Project Structure`
+
+![Project Structure Location](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/project-strucutre-location.png)
+
+Inside the Project Structure panel, you want to select "Project" and open up the tab that 
+
+`SDK` → `Add SDK` → `JDK...`
+
+![Project Structure Panel](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/project-structure-panel.png)
+
+You'll then want to navigate to the location where your JDK is installed. This could be a few different places, depending on how you installed it - if you installed Jabba, like in <a href="/posts/installing-java-for-kotlin" target="_blank">this article</a> then you'll be able to use the image below to guide you.
+
+Jabba installs JDKs to `~/.jabba` on Linux and MacOS. On MacOS, you may have to enable hidden files with `cmd + shift + .` ← That is a full stop. 
+
+When you find the `.jabba` directory, navigate to `JDK` then select the top level folder of JDK you want to use, like in the image. Then press `open` or `ok`, depending on your system.
+
+![JDK Location](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/jdk-location.png)
+
+If you are using Windows, you're kind of on your own as I don't have a Windows system to test this on. The idea would be the same though. Find where you installed the JDK directory and select the directory.
+
+If you run into this problem on Windows and manage to solve it, let me know and I can update this post with your feedback.
+
+And that _should_ solve your problem! Try running the application again.
+
+If the problem persists, have a bit of a Google. If that still comes up short, open an issue.
+
+### Check your module classpath for missing or conflicting dependencies
+
+This one involves deleting some directories. They get rebuilt when you start IntelliJ and build your project.
+
+Again, this will be for Linux and Mac, but I will provide a location that _might_ provide a fix for this on Windows but, again, I haven't been able to test this. Let me know if you manage to solve it.
+
+Apart from restarting IntelliJ and reimporting the project, these can be done in any order:
+
+1. Delete `~/.gradle/cahes/`
+  
+2. Then, either:
+  
+    * **Linux:** Delete `~/.cache/JetBrains/IntelliJIdea[version]`
+
+    * **Mac:** Delete `~/Library/Application\ Support/Library/JetBrains/IntelliJIdea[version]`
+
+    * **Windows:** Delete `C:\Users\your-user\AppData\Local\JetBrains\IntelliJIdea[Version]\.caches`
+
+3. Delete `<project-dir>/.gradle`
+
+4. Delete `<project-dir>/.idea`
+
+Finally, restart IntelliJ and reimport the project.
+
+That should be it. If you are still having issues, search the web with the errors and see if you are able to solve it.
+
+If you have experienced different errors than what are listed here and you found method to solve it, let me know and I can add it in.
+
+Happy coding!
