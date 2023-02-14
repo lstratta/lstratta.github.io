@@ -410,7 +410,7 @@ Jabba installs JDKs to `~/.jabba` on Linux and MacOS. On MacOS, you may have to 
 
 When you find the `.jabba` directory, navigate to `JDK` then select the top level folder of JDK you want to use, like in the image. Then press `open` or `ok`, depending on your system.
 
-![JDK Location](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/jdk-location.png)
+![JDK Location](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/jdk-location.png)
 
 If you are using Windows, you're kind of on your own as I don't have a Windows system to test this on. The idea would be the same though. Find where you installed the JDK directory and select the directory.
 
