@@ -372,6 +372,10 @@ If you would like to see all the code above inside the project itself, checkout 
 
 Until next time! 
 
+<br>
+
+---
+
 ## Prepare for trouble(shooting)! Make it double!
 
 There are a couple of reasons that your app could fail, one of them being you made a typo somewhere - but I am going to assume you that you have checked over your code and your getting some errors that say things like 

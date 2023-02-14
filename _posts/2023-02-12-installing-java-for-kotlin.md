@@ -26,7 +26,7 @@ So, today, we are going to run through setting up Jabba and installing a version
 
 Java comes in many different versions, not only their version number, but are also modified and modified by various different companies and organisations.
 
-[Jabba is an open-source project](https://github.com/shyiko/jabba) that has been built to help manage the different Java versions out there.
+<a href="https://github.com/shyiko/jabba" target="_blank">Jabba is an open-source project</a> that has been built to help manage the different Java versions out there.
 
 ## Installing Jabba
 
@@ -88,7 +88,7 @@ All you have to do to have multiple versions available is to install the selecte
 
 By default, Jabba does not `use` a Java version globally; it only does it for the shell that you run it in. 
 
-If you would like to set your version globally, you can use the following commands:
+If you would like to set your version globally (this step is entirely optional), you can use the following commands:
 
 For Linux (not tested on Mac)
 
@@ -112,3 +112,9 @@ $envPath=$envRegKey.GetValue('Path', $null, "DoNotExpandEnvironmentNames").repla
 [Environment]::SetEnvironmentVariable('JAVA_HOME', "$(jabba which $(jabba current))", 'Machine')
 [Environment]::SetEnvironmentVariable('PATH', "%JAVA_HOME%\bin;$envPath", 'Machine')
 ```
+
+Jabba has its full documentation available <a href="https://github.com/shyiko/jabba" target="_blank">over on GitHub</a>, so be sure to check that out if you run into issues.
+
+## Enjoy Using Kotlin
+
+Now that you have Java installed, you can write Kotlin until your heart's content! But, if you haven't done so already, check out my <a href="/posts/getting-started-with-kotlin-and-spring-boot" target="_blank">previous post</a> to learn how to make an API and connect it to a database using Kotlin.
