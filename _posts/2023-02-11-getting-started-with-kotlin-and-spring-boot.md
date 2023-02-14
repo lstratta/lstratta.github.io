@@ -69,7 +69,7 @@ Like every tutorial out there, we're going to put together a simple API to walk 
 
 But don't you worry. I am going to help you start to work with more advanced topics in the future; all the stuff I wish I had been able to find when I started out.
 
-![Spring Boot Dependencies](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-init-dependencies-new.png)
+![Spring Boot Dependencies](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-init-dependencies-new.png)
 
 For our simple API, we have chosen:
 * `Spring Web` to allow us to have a server for our app and allow us to create a RESTful API. It will automatically set up a Tomcat web server for us
