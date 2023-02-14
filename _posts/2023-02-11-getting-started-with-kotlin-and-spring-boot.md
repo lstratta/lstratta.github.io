@@ -414,10 +414,38 @@ When you find the `.jabba` directory, navigate to `JDK` then select the top leve
 
 If you are using Windows, you're kind of on your own as I don't have a Windows system to test this on. The idea would be the same though. Find where you installed the JDK directory and select the directory.
 
+If you run into this problem on Windows and manage to solve it, let me know and I can update this post with your feedback.
+
 And that _should_ solve your problem! Try running the application again.
 
 If the problem persists, have a bit of a Google. If that still comes up short, open an issue.
 
 ### Check your module classpath for missing or conflicting dependencies
 
-This one is a tricky one 
+This one involves deleting some directories. They get rebuilt when you start IntelliJ and build your project.
+
+Again, this will be for Linux and Mac, but I will provide a location that _might_ provide a fix for this on Windows but, again, I haven't been able to test this. Let me know if you manage to solve it.
+
+Apart from restarting IntelliJ and reimporting the project, these can be done in any order:
+
+1. Delete `~/.gradle/cahes/`
+  
+2. Then, either:
+  
+    * **Linux:** Delete `~/.cache/JetBrains/IntelliJIdea[version]`
+
+    * **Mac:** Delete `~/Library/Application\ Support/Library/JetBrains/IntelliJIdea[version]`
+
+    * **Windows:** Delete `C:\Users\your-user\AppData\Local\JetBrains\IntelliJIdea[Version]\.caches`
+
+3. Delete `<project-dir>/.gradle`
+
+4. Delete `<project-dir>/.idea`
+
+Finally, restart IntelliJ and reimport the project.
+
+That should be it. If you are still having issues, search the web with the errors and see if you are able to solve it.
+
+If you have experienced different errors than what are listed here and you found method to solve it, let me know and I can add it in.
+
+Happy coding!
