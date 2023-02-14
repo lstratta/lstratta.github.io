@@ -69,7 +69,7 @@ Like every tutorial out there, we're going to put together a simple API to walk 
 
 But don't you worry. I am going to help you start to work with more advanced topics in the future; all the stuff I wish I had been able to find when I started out.
 
-![Spring Boot Dependencies](../assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-init-dependencies-new.png)
+![Spring Boot Dependencies](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/spring-init-dependencies-new.png)
 
 For our simple API, we have chosen:
 * `Spring Web` to allow us to have a server for our app and allow us to create a RESTful API. It will automatically set up a Tomcat web server for us
@@ -233,7 +233,7 @@ But we have no data in the database, which means we have no Super Heroes to call
 
 Let's populate the database with our Super Heroes.
 
-![Create tables and insert data](assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/data-sql-script.new.png)
+![Create tables and insert data](/assets/images/2023-08-11-getting-started-with-kotlin-and-spring-boot/data-sql-script.new.png)
 
 Here we have a simple SQL script in the `resources/sql` path. I created the `sql/` directory, it won't be there by default.
 
