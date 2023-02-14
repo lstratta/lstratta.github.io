@@ -21,7 +21,7 @@ To get the most out of this tutorial, I'd recommend you have:
 
 * Java installed on your machine, ideally the version you select in the set up below - see <a href="/posts/installing-java-for-kotlin" target="_blank">this post</a>
 * Basic Kotlin language understanding
-* You've opened a terminal before and can change directory
+* Opened a terminal before and can change directory
 * <a href="https://www.jetbrains.com/idea/download/" target="_blank">IntelliJ</a>, or your IDE of choice installed
 * Your favourite beverage to hand
 
