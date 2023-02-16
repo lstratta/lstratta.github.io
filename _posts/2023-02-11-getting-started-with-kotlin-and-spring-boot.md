@@ -111,9 +111,9 @@ Alright, let's write some code, shall we?
 
 Let's get a API up and running. We're going to need a couple of things:
 
-1. We'll need a data model that is represented in the database.
-2. We'll need a controller that will handle requests and respond with objects.
-3. We'll need a schema in the database so that the database knows to create the tables on app startup.
+1. A data model that is represented in the database.
+2. A controller that will handle requests and respond with objects.
+3. A schema in the database so that the database knows to create the tables on app startup.
 
 Typically, we'd have more separation between these layers, but for the purposes of getting to the point, we'll skip a few steps. We'll come back to this stuff in later posts.
 
@@ -366,7 +366,7 @@ As you can see, with just a few lines of code and couple of files, you have a ni
 
 In future posts, we'll look into the data, service, and controller layer a bit more and start work with data transfer objects, otherwise known as DTOs.
 
-If you would like to see all the code above inside the project itself, checkout my <a href="https://github.com/lstratta/kotlin-guide/tree/main/tutorials/getting-started-kotlin-spring-boot/superapp" target="_blank">GitHub repo here for the project here</a>.
+If you would like to see all the code above inside the project itself, checkout my <a href="https://github.com/lstratta/kotlin-guide/tree/main/tutorials/getting-started-kotlin-spring-boot/superapp" target="_blank">GitHub repo for the project here</a>.
 
 **If you found this guide helpful, feel free to share it with friends and give it a star over <a href="https://github.com/lstratta/kotlin-guide/" target="_blank">on my GitHub</a>.**
 
