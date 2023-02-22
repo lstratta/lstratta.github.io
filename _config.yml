@@ -21,7 +21,7 @@ timezone: Europe/London
 
 title: Luke Stratta        # the main title
 
-tagline: Backend engineer - sharing what I learn   # it will display as the sub-title
+tagline: fullstack engineer - sharing what I learn   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   Backend engineer that nerds out about System and API design using Kotlin and Spring. Sharing what I learn.
